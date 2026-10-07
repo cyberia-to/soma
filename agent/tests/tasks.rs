@@ -27,7 +27,7 @@ impl Authority for FaultAuthority {
 }
 type TestAgent = Agent<FaultAuthority>;
 fn open(path: &std::path::Path, boot: u8) -> (TestAgent, GrantHandle) {
-    let vault = KeyVault::new(mudra::SigningKey::from_bytes((&[7u8; 32]).into()).unwrap());
+    let vault = KeyVault::new(neuron_auth::SigningKey::from_bytes((&[7u8; 32]).into()).unwrap());
     let subject = vault.subject();
     let grant = GrantHandle::new(Grant {
         neuron: subject,

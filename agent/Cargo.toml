@@ -19,4 +19,4 @@ rustix = { version = "1", features = ["fs"] }
 
 [dev-dependencies]
 tempfile = "3"
-mudra = { package = "cyber-mudra", path = "../../mudra", default-features = false }
+neuron-auth = { path = "../../neuron/auth", default-features = false }
