@@ -55,7 +55,7 @@ All inference runs in nox with STARK proof. Provable AI.
 - **nox** — STARK VM; every inference is proven
 - **cybergraph** — coordination graph; particle + cyberlink storage
 - **tri-kernel** — D (diffusion) + S (springs) + H (heat) tri-kernel recomputation
-- **zheng** — proof system (~5μs verify)
+- **zheng** — proof system
 
 ## Files
 
