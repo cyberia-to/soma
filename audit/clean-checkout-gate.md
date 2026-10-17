@@ -57,3 +57,12 @@ Merging soma#1 closes this row's soma slice — it is the same content this
 audit measured, already reviewable. Until then, soma is phase-1's one
 component where row 39 has no code-side fix available to a worker: the fix
 is merging a PR that already exists, not opening a new one.
+
+## re-verified 2026-10-17
+
+`origin/main` is still 7cfa6f8 and still has no `Cargo.toml`
+(`git ls-tree -r --name-only origin/main | grep -c Cargo.toml` → 0). The
+kernel and agent still sit on `origin/docs/foculus-links`, now soma#1 titled
+"DECIDE: docs: migrate [[sync]] to [[foculus]]" and waiting on the owner;
+`feat/kernel-live-stream` (soma#4) and `chore/neuron-auth` stack on it. Row 39
+in [[cyber/launch]] is still open; the finding stands.
