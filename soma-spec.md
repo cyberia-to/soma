@@ -761,7 +761,7 @@ Transform — computation:
 infer(model_id, input)             model inference via glia
 compute(formula, args)             nox program execution (proven computation)
 prove(claim)                       generate zheng proof for a claim
-verify(proof)                      verify zheng proof in ~5 μs
+verify(proof)                      verify zheng proof
 ```
 
 That is the entire instruction set: ~16 atomic Skills. Everything else is Skill<Composite> built over these. Reading and writing dominate (cybergraph is the substrate). Deciding selects among options. Transforming produces new content from existing.
