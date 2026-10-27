@@ -1,4 +1,6 @@
-# soma — machine mind
+# AGENTS.md — soma
+
+> the doctrine of the home is `~/cyber/AGENTS.md`; it applies here first. Claude Code receives both files at session start through `~/.config/cyber/agents-md.nu`; other agents read them in order.
 
 Local cognitive architecture of one cyber Avatar. A machine that perceives, decides, acts, learns, and survives.
 
