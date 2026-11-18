@@ -66,3 +66,23 @@ kernel and agent still sit on `origin/docs/foculus-links`, now soma#1 titled
 "DECIDE: docs: migrate [[sync]] to [[foculus]]" and waiting on the owner;
 `feat/kernel-live-stream` (soma#4) and `chore/neuron-auth` stack on it. Row 39
 in [[cyber/launch]] is still open; the finding stands.
+
+## re-verified 2026-11-18
+
+The fix no longer sits where "remains" above points. `origin/docs/foculus-links`
+and soma#1 have been superseded: the same content, with `main` merged in, is now
+[soma#5](https://github.com/cyberia-to/soma/pull/5) on branch `land/kernel`, and
+soma#4 (`feat/kernel-live-stream`) closes as superseded by it. Read "merging
+soma#1" above as "merging soma#5".
+
+Row 39 stays **open**, and merging soma#5 does not close it. `main` gains
+`kernel/` and `agent/`, so the gate can finally run — and it still fails, at a
+later line than before: `kernel/Cargo.toml` line 18 makes `soma-agent` a
+non-optional dependency of `soma-kernel`, and `agent/Cargo.toml` line 14
+requires `cybergraph` with the `local-storage` feature, which is not on
+cybergraph's default branch. A clean checkout of soma's default branch
+therefore still does not build; the failure moves from "no `Cargo.toml` at all"
+to "a dependency feature that does not exist". The follow-up that closes the
+row is cybergraph#3, which puts `local-storage` on cybergraph's default branch.
+This page stays `status: open` until a clean checkout of soma's `main` builds
+and tests.
