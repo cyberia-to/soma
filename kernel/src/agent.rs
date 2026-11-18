@@ -190,6 +190,12 @@ impl Provider {
             }
         }
     }
+    /// Put back a correlation whose observation `poll` handed out but the
+    /// caller could not persist, so `pending`/`has_pending` keep telling the
+    /// truth about what is still unsettled.
+    pub fn restore(&mut self, c: &Correlation) {
+        self.pending.insert((c.task, c.operation, c.attempt));
+    }
     pub fn pending(&self, task: Id, operation: Id, attempt: Id) -> bool {
         self.pending.contains(&(task, operation, attempt))
     }
@@ -270,6 +276,13 @@ fn infer(
         }
         *loaded = None;
         let mind = super::wake(&cfg)?;
+        // wake() falls back to the smallest weight file in ~/llm when the
+        // pinned path does not look usable to it, and the revision checks
+        // around this load both read the pinned path — so without this the
+        // cache would hold other weights under the admitted revision.
+        if mind.path != cfg.model {
+            return Err("model resolved away from the pinned path".into());
+        }
         if revision(&cfg.model)? != model.revision {
             return Err("model revision changed during load".into());
         }
@@ -394,7 +407,10 @@ pub fn drive<A: soma_agent::Authority>(
             break;
         };
         if let Event::Observed(c, output) = &event {
-            tasks.observe(c.task, c.operation, c.attempt, output.clone())?;
+            if let Err(e) = tasks.observe(c.task, c.operation, c.attempt, output.clone()) {
+                provider.model.restore(c);
+                return Err(e);
+            }
         }
         events.push(event);
     }
